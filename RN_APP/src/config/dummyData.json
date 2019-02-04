@@ -1,0 +1,123 @@
+import bear from './src/assets/bear.jpg';
+import car from './src/assets/car.jpg';
+import duck from './src/assets/duck.jpg';
+import minion from './src/assets/minion.jpg';
+
+export const data = {
+  "information": [
+    {"id": 1,
+    "image": bear,
+    "price": "40 TL",
+    "name": "Bear"}, {"id": 2,
+    "image": car,
+    "price": "75 TL",
+    "name": "Car"}, {
+      "id": 3,
+      "image": duck,
+      "price": "15 TL",
+      "name": "Duck"
+    },
+    {
+      "id": 4,
+      "image": minion,
+      "price": "55 TL",
+      "name": "Minions"
+    },
+    {
+      "id": 5,
+      "image": bear,
+      "price": "40 TL",
+      "name": "Bear"
+    },
+    {
+      "id": 6,
+      "image": car,
+      "price": "75 TL",
+      "name": "Car"
+    },
+    {
+      "id": 7,
+      "image": duck,
+      "price": "15 TL",
+      "name": "Duck"
+    },
+    {
+      "id": 8,
+      "image": minion,
+      "price": "55 TL",
+      "name": "Minions"
+    },
+    {
+      "id": 9,
+      "image": bear,
+      "price": "40 TL",
+      "name": "Bear"
+    },
+    {
+      "id": 10,
+      "image": car,
+      "price": "75 TL",
+      "name": "Car"
+    },
+    {
+      "id": 11,
+      "image": duck,
+      "price": "15 TL",
+      "name": "Duck"
+    },
+    {
+      "id": 12,
+      "image": minion,
+      "price": "55 TL",
+      "name": "Minions"
+    },
+    {
+      "id": 13,
+      "image": bear,
+      "price": "40 TL",
+      "name": "Bear"
+    },
+    {
+      "id": 14,
+      "image": car,
+      "price": "75 TL",
+      "name": "Car"
+    },
+    {
+      "id": 15,
+      "image": duck,
+      "price": "15 TL",
+      "name": "Duck"
+    },
+    {
+      "id": 16,
+      "image": minion,
+      "price": "55 TL",
+      "name": "Minions"
+    },
+    {
+      "id": 17,
+      "image": bear,
+      "price": "40 TL",
+      "name": "Bear"
+    },
+    {
+      "id": 18,
+      "image": car,
+      "price": "75 TL",
+      "name": "Car"
+    },
+    {
+      "id": 19,
+      "image": duck,
+      "price": "15 TL",
+      "name": "Duck"
+    },
+    {
+      "id": 20,
+      "image": minion,
+      "price": "55 TL",
+      "name": "Minions"
+    }
+  ]
+}
