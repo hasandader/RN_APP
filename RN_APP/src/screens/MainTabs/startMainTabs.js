@@ -24,7 +24,7 @@ const startTabs = () => {
           icon: sources[1]
         },
         {
-          screen: "display-items.AuthScreen",
+          screen: "display-items.LoginScreen",
           label: "Profile",
           title: "Profile",
           icon: sources[2]

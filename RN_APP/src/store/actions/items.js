@@ -1,14 +1,8 @@
-import { CLOSE_PAGE, SELECT_ITEM } from './actionTypes';
+import { FILL_CART } from './actionTypes';
 
-export const closePage = () => {
+export const fillCart = (items) => {
   return {
-    type: CLOSE_PAGE
-  };
-};
-
-export const selectItem = (key) => {
-  return {
-    type: SELECT_ITEM,
-    itemKey: key
+    type: FILL_CART,
+    item: items
   };
 };
