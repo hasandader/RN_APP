@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { View, Image, Text, StyleSheet, Modal, Button, Alert } from 'react-native';
 
 import { connect } from 'react-redux';
-import { addItem, getOrders } from '../../store/actions/index';
+import { addItem, getOrders, updateOrders } from '../../store/actions/index';
 import ImagePicker from 'react-native-image-picker';
 
 class ItemDetail extends Component {
@@ -17,24 +17,20 @@ class ItemDetail extends Component {
 }
 
   itemAddedHandler = () => {
-    // let test = [];
-    // if(this.props.items !== test){
-    //   const chosen = this.props.items.find(item => {
-    //     return item.id === this.props.selectedItem.key;
-    //   });
-    //   if(chosen){
-    //     chosen.amount = chosen.amount+1;
-    //
-    //     this.props.onAddItem(
-    //       chosen.key,
-    //       chosen.id,
-    //       chosen.name,
-    //       chosen.price,
-    //       chosen.image,
-    //       chosen.amount
-    //     );
-    //   }
-    // }
+      let chosen = null;
+      chosen = this.props.items.find(item => {
+        return item.name === this.props.selectedItem.name;
+      });
+
+      if(chosen){
+        this.props.onUpdateOerder(
+          chosen.key,
+          chosen.name,
+          chosen.price,
+          chosen.image,
+          chosen.amount+1
+        );
+      }else{
         this.props.onAddItem(
         this.props.selectedItem.key,
         this.props.selectedItem.name,
@@ -42,6 +38,9 @@ class ItemDetail extends Component {
         this.props.selectedItem.image,
         this.state.amount
       );
+      }
+
+
   this.props.onLoadItems();
 };
 
@@ -123,7 +122,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddItem: (key, name, price, image, amount) =>
       dispatch(addItem(key, name, price, image, amount)),
-      onLoadItems: () => dispatch(getOrders())
+      onLoadItems: () => dispatch(getOrders()),
+      onUpdateOerder: (key, name, price, image, amount) => dispatch(updateOrders(key, name, price, image, amount))
   };
 };
 

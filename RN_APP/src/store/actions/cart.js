@@ -94,6 +94,33 @@ export const getOrders = () => {
   };
 };
 
+export const updateOrders = (key, name, price, image, amount) => {
+  return dispatch => {
+    const itemData = {
+      key:key,
+      name: name,
+      price: price,
+      image: image,
+      amount: amount
+        };
+    dispatch(authGetToken())
+      .catch(() => {
+        alert("No valid token found!");
+      })
+      .then(() => {
+         fetch("https://rn-app-9fc18.firebaseio.com/items/" + key + ".json", {
+          method: "PUT",
+          body: JSON.stringify(itemData)
+        })
+        .catch(err => console.log(err))
+        .then(res => res.json())
+        .then(parsedRes => {
+          console.log(parsedRes);
+        });
+      });
+  };
+};
+
 export const setItems = items => {
   return {
     type: SET_ITEMS,
