@@ -8,7 +8,7 @@ import ImagePicker from 'react-native-image-picker';
 class ItemDetail extends Component {
 
   componentDidMount() {
-  this.props.onLoadItems();
+  this.props.onLoadItems(this.props.userID);
 }
 
   state = {
@@ -28,20 +28,24 @@ class ItemDetail extends Component {
           chosen.name,
           chosen.price,
           chosen.image,
-          chosen.amount+1
+          chosen.amount+1,
+          this.props.userID
         );
+          this.props.onLoadItems(this.props.userID);
       }else{
         this.props.onAddItem(
         this.props.selectedItem.key,
         this.props.selectedItem.name,
         this.props.selectedItem.price,
         this.props.selectedItem.image,
-        this.state.amount
+        this.state.amount,
+        this.props.userID
       );
+        this.props.onLoadItems(this.props.userID);
       }
 
 
-  this.props.onLoadItems();
+
 };
 
 
@@ -114,16 +118,17 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    items: state.items.cartItems
+    items: state.items.cartItems,
+    userID: state.auth.uid
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddItem: (key, name, price, image, amount) =>
-      dispatch(addItem(key, name, price, image, amount)),
-      onLoadItems: () => dispatch(getOrders()),
-      onUpdateOerder: (key, name, price, image, amount) => dispatch(updateOrders(key, name, price, image, amount))
+    onAddItem: (key, name, price, image, amount, uid) =>
+      dispatch(addItem(key, name, price, image, amount, uid)),
+      onLoadItems: (uid) => dispatch(getOrders(uid)),
+      onUpdateOerder: (key, name, price, image, amount, uid) => dispatch(updateOrders(key, name, price, image, amount, uid))
   };
 };
 

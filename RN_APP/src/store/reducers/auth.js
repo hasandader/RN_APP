@@ -1,7 +1,8 @@
-import { AUTH_SET_TOKEN } from "../actions/actionTypes";
+import { AUTH_SET_TOKEN, AUTH_SET_UID } from "../actions/actionTypes";
 
 const initialState = {
-  token: null
+  token: null,
+  uid: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.token
+      };
+      case AUTH_SET_UID:
+      return {
+        ...state,
+        uid: action.uid
       };
     default:
       return state;

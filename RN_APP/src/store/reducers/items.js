@@ -2,7 +2,7 @@ import { SET_ITEMS, FILL_CART } from '../actions/actionTypes';
 
 const initialState = {
   data: [],
-  cartItems: []
+  cartItems: [],
 };
 
 const reducer = (state=initialState , action) => {

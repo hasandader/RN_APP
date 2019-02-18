@@ -1,13 +1,18 @@
 import React,{ Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { getOrders, updateOrders } from '../../store/actions/index';
+import { getOrders, updateOrders, deleteOrder } from '../../store/actions/index';
 
 import ShowOrder from '../../components/ShowOrder/ShowOrder';
 
 class Profile extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.items !== this.props.items){
+      this.props.onLoadItems(this.props.userID)
+    }
+  }
   componentDidMount() {
-  this.props.onLoadItems();
+  this.props.onLoadItems(this.props.userID);
 }
 
   itemSelectedHandler = name => {
@@ -34,8 +39,11 @@ class Profile extends Component {
       chosen.name,
       chosen.price,
       chosen.image,
-      chosen.amount+1
+      chosen.amount+1,
+      this.props.userID
     );
+
+    setTimeout(() => this.props.onLoadItems(this.props.userID), 1);
   }
 
   decrementHandler = name => {
@@ -43,13 +51,24 @@ class Profile extends Component {
       return item.name === name;
     });
 
-    this.props.onUpdateOerder(
-      chosen.key,
-      chosen.name,
-      chosen.price,
-      chosen.image,
-      chosen.amount-1
-    );
+    if(chosen.amount-1 === 0){
+      this.props.onDeleteItem(chosen.key, this.props.userID);
+    }else{
+      this.props.onUpdateOerder(
+        chosen.key,
+        chosen.name,
+        chosen.price,
+        chosen.image,
+        chosen.amount-1,
+        this.props.userID
+      );
+    }
+
+    setTimeout(() => this.props.onLoadItems(this.props.userID), 1);
+  }
+
+  itemDeleteHandler = (key) => {
+    this.props.onDeleteItem(key, this.props.userID);
   }
 
   render() {
@@ -60,6 +79,7 @@ class Profile extends Component {
           data={this.props.items}
           increment={this.incrementHandler}
           decrement={this.decrementHandler}
+          onItemDeleted={this.itemDeleteHandler}
           />
       </ScrollView>
     );
@@ -80,14 +100,16 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    items: state.items.cartItems
+    items: state.items.cartItems,
+    userID: state.auth.uid
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoadItems: () => dispatch(getOrders()),
-    onUpdateOerder: (key, name, price, image, amount) => dispatch(updateOrders(key, name, price, image, amount))
+    onLoadItems: (uid) => dispatch(getOrders(uid)),
+    onUpdateOerder: (key, name, price, image, amount, uid) => dispatch(updateOrders(key, name, price, image, amount, uid)),
+    onDeleteItem: (key, uid) => dispatch(deleteOrder(key, uid))
   };
 };
 

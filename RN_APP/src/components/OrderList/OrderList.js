@@ -1,42 +1,62 @@
 import React from 'react';
-import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Image, Text, StyleSheet, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-  //var number = 0;
+
 const OrderList = props => {
   return (
-    <TouchableOpacity onPress={alert("Nothing to do!")}>
-      <View style={styles.container}>
-        <View><Image resizeMode="cover" source={props.image} style={styles.image}/></View>
-        <View style={styles.discription}>
-          <Text style={styles.text}>{props.price}</Text>
-          <Text style={styles.text}>{props.name}</Text>
+    <View style={styles.main}>
+      <TouchableOpacity onPress={props.onItemPressed}>
+        <View style={styles.container}>
+          <View><Image resizeMode="cover" source={props.image} style={styles.image}/></View>
+          <View style={styles.discription}>
+            <Text style={styles.text}>{props.price}</Text>
+            <Text style={styles.text}>{props.name}</Text>
+              <TouchableOpacity onPress={props.delete}>
+                <View style={styles.arrow}>
+                  <Icon size={25} name={Platform.OS === "android" ? "md-trash" : "ios-trash"} color="red" />
+                </View>
+              </TouchableOpacity>
+          </View>
+          <View style={styles.buttons}>
+            <TouchableOpacity onPress={props.increment}>
+              <View style={styles.arrow}>
+                <Icon size={30} name="ios-arrow-dropup-circle" color="#006400" />
+              </View>
+            </TouchableOpacity>
+            <Text>{props.amount}</Text>
+            <TouchableOpacity onPress={props.decrement}>
+              <View style={styles.arrow}>
+                <Icon size={30} name="ios-arrow-dropdown-circle" color="#228B22" />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.buttons}>
-          <TouchableOpacity onPress={alert("Nothing to do!")}>
-            <View style={styles.arrow}>
-              <Icon size={20} name="ios-arrow-dropup-circle" color="#006400" />
-            </View>
-          </TouchableOpacity>
-          <Text>1</Text>
-          <TouchableOpacity onPress={alert("Nothing to do!")}>
-            <View style={styles.arrow}>
-              <Icon size={20} name="ios-arrow-dropdown-circle" color="#228B22" />
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    paddingTop: 5,
+    paddingBottom: 5
+  },
   container: {
+    flex: 1,
+    width: "100%",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "space-around",
+    backgroundColor: "white"
   },
   image: {
-    width: "100%",
-    height: 80
+    width: 90,
+    height: 90
   },
   discription: {
     flexDirection: "column",
@@ -44,12 +64,17 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   text: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "black"
   },
   buttons: {
     flexDirection: "column",
     padding: 5,
-    alignItems: "center"
+    alignItems: "center",
+    borderWidth: 2,
+    borderRadius: 20,
+    borderColor: "#32CD32"
   },
   arrow: {
     alignItems: "center"
