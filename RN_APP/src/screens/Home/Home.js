@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 import CardList from '../../components/CardList/CardList';
@@ -14,7 +14,6 @@ class Home extends Component {
     const chosen = this.props.items.find(item => {
       return item.key === key;
     });
-    //console.log(chosen);
     this.props.navigator.push({
       screen: "display-items.ItemDetailScreen",
       title: chosen.name,
@@ -23,11 +22,6 @@ class Home extends Component {
       }
     });
   };
-
-
-
-  //an error I got
-  //undefined is not a function (evaluating '(0, _index2.selectItem)(id)')
 
   render() {
     return(

@@ -7,6 +7,7 @@ import ProfileScreen from './src/screens/Profile/Profile';
 import ItemDetailScreen from './src/screens/ItemDetail/ItemDetail';
 import LoginScreen from './src/screens/Login/Login';
 import SignUpScreen from './src/screens/SignUp/SignUp';
+import LogOutScreen from './src/screens/LogOut/LogOut';
 import configureStore from './src/store/configureStore';
 
 const store = configureStore();
@@ -38,10 +39,15 @@ Navigation.registerComponent("display-items.SignUpScreen",
 store,
 Provider
 );
+Navigation.registerComponent("display-items.LogOutScreen",
+() => LogOutScreen,
+store,
+Provider
+);
 
 
 //Start an App
-Navigation.startSingleScreenApp({
+export default () => Navigation.startSingleScreenApp({
   screen: {
     screen: "display-items.SignUpScreen",
     title: "Sign Up"

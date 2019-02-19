@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import backgroundImage from "../../assets/toys.jpg";
 import NewButton from '../../components/UI/NewButton/NewButton';
 import validate from '../../utility/validation';
-import { tryAuth } from '../../store/actions/index';
+import { tryAuth, authAutoSignIn } from '../../store/actions/index';
 
 class SignUpScreen extends Component {
   state = {
@@ -44,6 +44,10 @@ class SignUpScreen extends Component {
       }
     }
   };
+
+  componentDidMount() {
+  this.props.onAutoSignIn();
+}
 
   authHandler = () => {
     const authData = {
@@ -206,7 +210,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAuth: (authData, authMode) => dispatch(tryAuth(authData, authMode))
+    onTryAuth: (authData, authMode) => dispatch(tryAuth(authData, authMode)),
+    onAutoSignIn: () => dispatch(authAutoSignIn())
   };
 };
 

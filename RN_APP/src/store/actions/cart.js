@@ -71,7 +71,7 @@ export const getOrders = (user) => {
         );
       })
       .catch(() => {
-        alert("No valid token found!");
+        //alert("No valid token found!");
       })
       .then(res => res.json())
       .then(parsedRes => {
@@ -88,7 +88,7 @@ export const getOrders = (user) => {
         dispatch(fillCart(items));
       })
       .catch(err => {
-        alert("Something went wrong, sorry :/" + err);
+        //alert("Something went wrong, sorry :/" + err);
         console.log(err);
       });
   };
