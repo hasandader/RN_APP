@@ -8,6 +8,7 @@ import ItemDetailScreen from './src/screens/ItemDetail/ItemDetail';
 import LoginScreen from './src/screens/Login/Login';
 import SignUpScreen from './src/screens/SignUp/SignUp';
 import LogOutScreen from './src/screens/LogOut/LogOut';
+import SideDrawerScreen from './src/screens/SideDrawer/SideDrawer';
 import configureStore from './src/store/configureStore';
 
 const store = configureStore();
@@ -41,6 +42,11 @@ Provider
 );
 Navigation.registerComponent("display-items.LogOutScreen",
 () => LogOutScreen,
+store,
+Provider
+);
+Navigation.registerComponent("display-items.SideDrawerScreen",
+() => SideDrawerScreen,
 store,
 Provider
 );

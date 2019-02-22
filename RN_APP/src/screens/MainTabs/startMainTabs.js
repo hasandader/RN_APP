@@ -7,7 +7,8 @@ const startTabs = () => {
   Promise.all([
     Icon.getImageSource("ios-home", 30),
     Icon.getImageSource("ios-cart", 30),
-    Icon.getImageSource("ios-contact", 30)
+    Icon.getImageSource("ios-contact", 30),
+    Icon.getImageSource(Platform.OS === 'android' ? "md-menu" : "ios-menu", 30)
   ]).then(sources => {
     Navigation.startTabBasedApp({
       tabs: [
@@ -15,13 +16,31 @@ const startTabs = () => {
           screen: "display-items.HomeScreen",
           label: "Home",
           title: "Home",
-          icon: sources[0]
+          icon: sources[0],
+          navigatorButtons: {
+            leftButtons: [
+              {
+                icon: sources[3],
+                title: "Menu",
+                id: "sideDrawerToggle"
+              }
+            ]
+          }
         },
         {
           screen: "display-items.ProfileScreen",
           label: "Cart",
           title: "Cart",
-          icon: sources[1]
+          icon: sources[1],
+          navigatorButtons: {
+            leftButtons: [
+              {
+                icon: sources[3],
+                title: "Menu",
+                id: "sideDrawerToggle"
+              }
+            ]
+          }
         },
         {
           screen: "display-items.LogOutScreen",
@@ -29,7 +48,12 @@ const startTabs = () => {
           title: "Log Out",
           icon: sources[2]
         }
-      ]
+      ],
+      drawer: {
+                left: {
+                    screen: "display-items.SideDrawerScreen"
+                }
+            },
     });
   })
 
