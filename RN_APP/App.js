@@ -1,50 +1,61 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
+import { Navigation } from 'react-native-navigation';
+import { Provider } from 'react-redux';
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'SOHAD' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu'
-});
+import HomeScreen from './src/screens/Home/Home';
+import ProfileScreen from './src/screens/Profile/Profile';
+import ItemDetailScreen from './src/screens/ItemDetail/ItemDetail';
+import LoginScreen from './src/screens/Login/Login';
+import SignUpScreen from './src/screens/SignUp/SignUp';
+import LogOutScreen from './src/screens/LogOut/LogOut';
+import SideDrawerScreen from './src/screens/SideDrawer/SideDrawer';
+import configureStore from './src/store/configureStore';
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        // <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>Eng.Hasan</Text>
-        <Text style={styles.instructions}>No one can challenge him</Text>
-      </View>
-    );
+const store = configureStore();
+
+//Register screens
+
+Navigation.registerComponent("display-items.HomeScreen",
+() => HomeScreen,
+store,
+Provider  //what was the function of the Provider ???!
+);
+Navigation.registerComponent("display-items.ProfileScreen",
+() => ProfileScreen,
+store,
+Provider
+);
+Navigation.registerComponent("display-items.ItemDetailScreen",
+() => ItemDetailScreen,
+store,
+Provider
+);
+Navigation.registerComponent("display-items.LoginScreen",
+() => LoginScreen,
+store,
+Provider
+);
+Navigation.registerComponent("display-items.SignUpScreen",
+() => SignUpScreen,
+store,
+Provider
+);
+Navigation.registerComponent("display-items.LogOutScreen",
+() => LogOutScreen,
+store,
+Provider
+);
+Navigation.registerComponent("display-items.SideDrawerScreen",
+() => SideDrawerScreen,
+store,
+Provider
+);
+
+
+//Start an App
+export default () => Navigation.startSingleScreenApp({
+  screen: {
+    screen: "display-items.SignUpScreen",
+    title: "Sign Up"
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  }
-});
+  });
